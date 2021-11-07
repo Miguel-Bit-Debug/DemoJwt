@@ -19,7 +19,24 @@ namespace DemoJwt.Controllers
                     Password = "01452136542336"
                 }
             };
-            return Ok(users);
+            return Ok(new List<ProductModel> 
+            {
+                new ProductModel
+                {
+                    Name = "Danonão Grosso",
+                    Price = 51M
+                },
+                new ProductModel
+                {
+                    Name = "Bolu de murangu",
+                    Price = 91M
+                },
+                new ProductModel
+                {
+                    Name = "Xerebenebia",
+                    Price = 100000M
+                }
+            });
         }
     }
 }

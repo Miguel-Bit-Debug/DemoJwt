@@ -1,5 +1,7 @@
 ﻿using DemoJwt.Models;
+using Infra.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,30 +16,79 @@ namespace DemoJwt.Controllers
     [Route("v1/auth")]
     public class AuthController : Controller
     {
+        private readonly UserManager<IdentityUserEntity> _userManager;
+        private readonly SignInManager<IdentityUserEntity> _signInManager;
+
         private readonly JwtSettings _jwtSettings;
 
-        public AuthController(IOptions<JwtSettings> jwtSettings)
+        public AuthController(IOptions<JwtSettings> jwtSettings,
+                              UserManager<IdentityUserEntity> userManager,
+                              SignInManager<IdentityUserEntity> signInManager)
         {
             _jwtSettings = jwtSettings.Value;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<UserTokenModel>> Index([FromBody] UserModel user)
+        public async Task<ActionResult<UserTokenModel>> Index([FromBody] UserLoginEntity user)
         {
-            if (user.Email != "teste@gmail.com")
-            {
-                return Unauthorized();
-            }
-            var token = GenerateAccessToken(user);
 
-            return new UserTokenModel
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values);
+
+            var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, false, true);
+
+            if (result.Succeeded)
             {
-                Token = token
-            };
+                var token = GenerateAccessToken(user.Email);
+
+                return new UserTokenModel
+                {
+                    Token = token
+                };
+            }
+
+            return BadRequest("Usuário ou senha inválidos.");
         }
 
-        private string GenerateAccessToken(UserModel user)
+        [HttpPost("register")]
+        public async Task<ActionResult<UserTokenModel>> Register([FromBody] UserRegisterEntity model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values);
+
+            if (model.Email is null || model.Password is null)
+            {
+                return BadRequest("Por favor preencher todas as informações.");
+            }
+
+            var user = new IdentityUserEntity
+            {
+                Avatar = model.Avatar,
+                Email = model.Email,
+                UserName = model.Email,
+                EmailConfirmed = true
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
+                var token = GenerateAccessToken(user.Email);
+
+                return new UserTokenModel
+                {
+                    Token = token
+                };
+
+            }
+
+            return BadRequest();
+        }
+
+        private string GenerateAccessToken(string email)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_jwtSettings.SecretKey);
@@ -45,7 +96,7 @@ namespace DemoJwt.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Email.ToString()),
+                    new Claim(ClaimTypes.Name, email),
                 }),
                 Audience = _jwtSettings.Audience,
                 Issuer = _jwtSettings.Issuer,
