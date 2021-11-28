@@ -1,5 +1,5 @@
-﻿using DemoJwt.Models;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Domain.Models;
 using Infra.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
