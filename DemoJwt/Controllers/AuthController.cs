@@ -1,4 +1,4 @@
-﻿using DemoJwt.Models;
+﻿using Domain.Models;
 using Infra.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

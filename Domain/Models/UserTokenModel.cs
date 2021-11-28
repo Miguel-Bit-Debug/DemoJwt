@@ -1,4 +1,4 @@
-﻿namespace DemoJwt.Models
+﻿namespace Domain.Models
 {
     public class UserTokenModel
     {

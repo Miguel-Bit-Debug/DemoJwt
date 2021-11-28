@@ -1,4 +1,5 @@
-﻿using DemoJwt.Models;
+﻿using Domain.Models;
+using Infra.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -19,19 +20,19 @@ namespace DemoJwt.Controllers
                     Password = "01452136542336"
                 }
             };
-            return Ok(new List<ProductModel> 
+            return Ok(new List<ProductsEntity> 
             {
-                new ProductModel
+                new ProductsEntity
                 {
                     Name = "Danonão Grosso",
                     Price = 51M
                 },
-                new ProductModel
+                new ProductsEntity
                 {
                     Name = "Bolu de murangu",
                     Price = 91M
                 },
-                new ProductModel
+                new ProductsEntity
                 {
                     Name = "Xerebenebia",
                     Price = 100000M

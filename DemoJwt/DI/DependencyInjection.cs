@@ -1,11 +1,10 @@
 ﻿using Infra.Data.Data;
 using Infra.Data.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infra.Data.DI
+namespace DemoJwt.DI
 {
     public static class DependencyInjection
     {
@@ -18,7 +17,6 @@ namespace Infra.Data.DI
             });
 
             services.AddDefaultIdentity<IdentityUserEntity>(opt => opt.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<AppDbContext>();
-
         }
     }
 }
