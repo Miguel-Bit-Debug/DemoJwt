@@ -1,4 +1,5 @@
 ﻿using DemoJwt.Models;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -24,17 +25,17 @@ namespace DemoJwt.Controllers
                 new ProductModel
                 {
                     Name = "Danonão Grosso",
-                    Price = 51M
+                    Price = 51
                 },
                 new ProductModel
                 {
                     Name = "Bolu de murangu",
-                    Price = 91M
+                    Price = 91
                 },
                 new ProductModel
                 {
                     Name = "Xerebenebia",
-                    Price = 100000M
+                    Price = 100000
                 }
             });
         }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Infra.Data.Entities
 {
-    public class UserRegisterEntity
+    public class UserRegisterModel
     {
         [DataType(DataType.EmailAddress)]
         public string Avatar { get; set; }

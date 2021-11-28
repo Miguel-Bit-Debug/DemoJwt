@@ -1,5 +1,5 @@
 using DemoJwt.Models;
-using Infra.Data.DI;
+using Domain.DI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +27,7 @@ namespace DemoJwt
             services.AddControllers();
 
 
-            services.AddServicesExtention(Configuration);
+            services.AddDependenciesDbConnection(Configuration);
 
             var jwtSection = Configuration.GetSection("JwtSettings");
             services.Configure<JwtSettings>(jwtSection);

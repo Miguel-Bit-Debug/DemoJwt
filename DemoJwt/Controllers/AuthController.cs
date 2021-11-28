@@ -1,4 +1,5 @@
 ﻿using DemoJwt.Models;
+using Domain.Entities;
 using Infra.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,14 +17,14 @@ namespace DemoJwt.Controllers
     [Route("v1/auth")]
     public class AuthController : Controller
     {
-        private readonly UserManager<IdentityUserEntity> _userManager;
-        private readonly SignInManager<IdentityUserEntity> _signInManager;
+        private readonly UserManager<IdentityUserModel> _userManager;
+        private readonly SignInManager<IdentityUserModel> _signInManager;
 
         private readonly JwtSettings _jwtSettings;
 
         public AuthController(IOptions<JwtSettings> jwtSettings,
-                              UserManager<IdentityUserEntity> userManager,
-                              SignInManager<IdentityUserEntity> signInManager)
+                              UserManager<IdentityUserModel> userManager,
+                              SignInManager<IdentityUserModel> signInManager)
         {
             _jwtSettings = jwtSettings.Value;
             _userManager = userManager;
@@ -32,7 +33,7 @@ namespace DemoJwt.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<UserTokenModel>> Index([FromBody] UserLoginEntity user)
+        public async Task<ActionResult<UserTokenModel>> Index([FromBody] UserLoginModel user)
         {
 
             if (!ModelState.IsValid) return BadRequest(ModelState.Values);
@@ -53,7 +54,7 @@ namespace DemoJwt.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserTokenModel>> Register([FromBody] UserRegisterEntity model)
+        public async Task<ActionResult<UserTokenModel>> Register([FromBody] UserRegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values);
 
@@ -62,7 +63,7 @@ namespace DemoJwt.Controllers
                 return BadRequest("Por favor preencher todas as informações.");
             }
 
-            var user = new IdentityUserEntity
+            var user = new IdentityUserModel
             {
                 Avatar = model.Avatar,
                 Email = model.Email,

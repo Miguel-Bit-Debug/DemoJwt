@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace DemoJwt.Models
+namespace Domain.Models
 {
     public class ProductModel
     {
@@ -11,8 +12,11 @@ namespace DemoJwt.Models
         {
             Id = Guid.NewGuid();
         }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public int Likes { get; set; }
     }
 }
