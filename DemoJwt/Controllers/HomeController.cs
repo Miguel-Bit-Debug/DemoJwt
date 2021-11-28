@@ -20,19 +20,19 @@ namespace DemoJwt.Controllers
                     Password = "01452136542336"
                 }
             };
-            return Ok(new List<ProductModel> 
+            return Ok(new List<ProductsEntity> 
             {
-                new ProductModel
+                new ProductsEntity
                 {
                     Name = "Danonão Grosso",
                     Price = 51
                 },
-                new ProductModel
+                new ProductsEntity
                 {
                     Name = "Bolu de murangu",
                     Price = 91
                 },
-                new ProductModel
+                new ProductsEntity
                 {
                     Name = "Xerebenebia",
                     Price = 100000

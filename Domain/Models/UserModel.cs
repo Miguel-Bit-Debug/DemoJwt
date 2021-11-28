@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DemoJwt.Models
+namespace Domain.Models
 {
     public class UserModel
     {
