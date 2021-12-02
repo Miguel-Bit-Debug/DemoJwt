@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Domain.Models;
+﻿using Domain.Models;
 using Infra.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +34,6 @@ namespace DemoJwt.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<UserTokenModel>> Index([FromBody] UserLoginModel user)
         {
-
             if (!ModelState.IsValid) return BadRequest(ModelState.Values);
 
             var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, false, true);

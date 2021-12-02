@@ -21,7 +21,7 @@ namespace DemoJwt.Controllers
         public async Task<ActionResult> Index([FromBody] ProductModel product)
         {
             await _service.Insert(product);
-            return Created("/", "");
+            return Ok();
         }
     }
 }
