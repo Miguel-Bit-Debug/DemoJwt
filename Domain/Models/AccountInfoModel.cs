@@ -1,5 +1,8 @@
-﻿namespace Domain.Models
+﻿using MongoDbGenericRepository.Attributes;
+
+namespace Domain.Models
 {
+    [CollectionName("AccountInfo")]
     public class AccountInfoModel
     {
         public string Avatar { get; set; }
