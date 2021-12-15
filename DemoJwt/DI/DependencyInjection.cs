@@ -17,20 +17,20 @@ namespace DemoJwt.DI
     {
         public static void AddServicesExtention(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<MongoDbContext>(options =>
             {
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDefaultIdentity<IdentityUserModel>(opt =>
+            services.AddDefaultIdentity<AccountModel>(opt =>
             {
                 opt.SignIn.RequireConfirmedAccount = false;
                 opt.Password.RequiredLength = 6;
                 opt.User.RequireUniqueEmail = true;
                 opt.Lockout.MaxFailedAccessAttempts = 5;
                 opt.Lockout.DefaultLockoutTimeSpan = new TimeSpan(0, 0, 15, 0);
-            }).AddEntityFrameworkStores<AppDbContext>();
+            }).AddEntityFrameworkStores<MongoDbContext>();
 
             services.AddTransient(typeof(IAddRepository<>), typeof(AddRepository<>));
             services.AddTransient(typeof(IAddService<>), typeof(AddService<>));

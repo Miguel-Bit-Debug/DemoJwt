@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +10,9 @@ namespace Domain.Models
 {
     public class ProductModel
     {
-        public ProductModel()
-        {
-            Id = Guid.NewGuid();
-        }
 
-        public Guid Id { get; set; }
+        [BsonId]
+        public ObjectId Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }

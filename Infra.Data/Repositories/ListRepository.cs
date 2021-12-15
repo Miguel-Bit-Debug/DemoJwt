@@ -8,9 +8,9 @@ namespace Infra.Data.Repositories
 {
     public class ListRepository : IListProductsRepository
     {
-        private readonly AppDbContext _context;
+        private readonly MongoDbContext _context;
 
-        public ListRepository(AppDbContext context)
+        public ListRepository(MongoDbContext context)
         {
             _context = context;
         }
