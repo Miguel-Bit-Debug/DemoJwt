@@ -8,10 +8,10 @@ namespace Infra.Data.Repositories
 {
     public class AccountInfoRepository : IAccountInfoRepository
     {
-        private readonly AppDbContext _context;
-        private readonly UserManager<IdentityUserModel> _userManager;
+        private readonly MongoDbContext _context;
+        private readonly UserManager<AccountModel> _userManager;
 
-        public AccountInfoRepository(AppDbContext context, UserManager<IdentityUserModel> userManager)
+        public AccountInfoRepository(MongoDbContext context, UserManager<AccountModel> userManager)
         {
             _context = context;
             _userManager = userManager;

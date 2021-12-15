@@ -6,9 +6,9 @@ namespace Infra.Data.Repositories.GenericsRepositories
 {
     public class AddRepository<T> : IAddRepository<T> where T : class
     {
-        private readonly AppDbContext _context;
+        private readonly MongoDbContext _context;
 
-        public AddRepository(AppDbContext context)
+        public AddRepository(MongoDbContext context)
         {
             _context = context;
         }
