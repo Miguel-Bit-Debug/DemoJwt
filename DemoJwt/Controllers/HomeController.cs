@@ -1,13 +1,15 @@
 ﻿using Domain.Interfaces;
+using Domain.Models;
+using Domain.Services.GenericsServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoJwt.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IListProductsServices _services;
+        private readonly IListServices<Product> _services;
 
-        public HomeController(IListProductsServices services)
+        public HomeController(IListServices<Product> services)
         {
             _services = services;
         }

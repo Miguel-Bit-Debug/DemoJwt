@@ -1,22 +1,22 @@
 ﻿using Domain.Interfaces.GenericsInterfaces;
 using Infra.Data.Data;
+using MongoDB.Driver;
 using System.Threading.Tasks;
 
 namespace Infra.Data.Repositories.GenericsRepositories
 {
-    public class AddRepository<T> : IAddRepository<T> where T : class
+    public class AddRepository<T> : IAddRepository<T>
     {
-        private readonly MongoDbContext _context;
+        private readonly IMongoCollection<T> _collection;
 
-        public AddRepository(MongoDbContext context)
+        public AddRepository(IMongoDbContext context)
         {
-            _context = context;
+            _collection = context.Collection<T>();
         }
 
         public async Task InsertAsync(T obj)
         {
-            await _context.AddAsync(obj);
-            await _context.SaveChangesAsync();
+            await _collection.InsertOneAsync(obj);
         }
     }
 }

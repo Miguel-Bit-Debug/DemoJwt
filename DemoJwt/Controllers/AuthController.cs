@@ -16,14 +16,14 @@ namespace DemoJwt.Controllers
     [Route("v1/auth")]
     public class AuthController : Controller
     {
-        private readonly UserManager<Domain.Models.AccountModel> _userManager;
-        private readonly SignInManager<Domain.Models.AccountModel> _signInManager;
+        private readonly UserManager<AccountModel> _userManager;
+        private readonly SignInManager<AccountModel> _signInManager;
 
         private readonly JwtSettings _jwtSettings;
 
         public AuthController(IOptions<JwtSettings> jwtSettings,
-                              UserManager<Domain.Models.AccountModel> userManager,
-                              SignInManager<Domain.Models.AccountModel> signInManager)
+                              UserManager<AccountModel> userManager,
+                              SignInManager<AccountModel> signInManager)
         {
             _jwtSettings = jwtSettings.Value;
             _userManager = userManager;
@@ -61,7 +61,7 @@ namespace DemoJwt.Controllers
                 return BadRequest("Por favor preencher todas as informações.");
             }
 
-            var user = new Domain.Models.AccountModel
+            var user = new AccountModel
             {
                 Avatar = model.Avatar,
                 Email = model.Email,

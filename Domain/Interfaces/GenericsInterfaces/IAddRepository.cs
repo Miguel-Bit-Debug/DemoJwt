@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces.GenericsInterfaces
 {
-    public interface IAddRepository<T> where T : class
+    public interface IAddRepository<T>
     {
         Task InsertAsync(T obj);
     }
