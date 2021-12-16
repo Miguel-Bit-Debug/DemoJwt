@@ -3,7 +3,6 @@ using Domain.Interfaces.GenericsInterfaces;
 using Domain.Services.GenericsServices;
 using Infra.Data.Data;
 using Infra.Data.Repositories.GenericsRepositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
