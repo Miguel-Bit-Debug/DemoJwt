@@ -10,15 +10,15 @@ namespace DemoJwt.Controllers
     [Route("v1/add")]
     public class AddProductController : ControllerBase
     {
-        private readonly IAddService<ProductModel> _service;
+        private readonly IAddService<Product> _service;
 
-        public AddProductController(IAddService<ProductModel> service)
+        public AddProductController(IAddService<Product> service)
         {
             _service = service;
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index([FromBody] ProductModel product)
+        public async Task<ActionResult> Index([FromBody] Product product)
         {
             await _service.Insert(product);
             return Ok();

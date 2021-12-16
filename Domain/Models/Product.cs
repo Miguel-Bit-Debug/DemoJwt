@@ -5,8 +5,8 @@ using System;
 
 namespace Domain.Models
 {
-    [CollectionName("Products")]
-    public class ProductModel
+    [CollectionName("Product")]
+    public class Product
     {
         [BsonId]
         public Guid Id { get; set; }

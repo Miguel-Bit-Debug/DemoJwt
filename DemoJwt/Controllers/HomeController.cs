@@ -7,9 +7,9 @@ namespace DemoJwt.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IListServices<ProductModel> _services;
+        private readonly IListServices<Product> _services;
 
-        public HomeController(IListServices<ProductModel> services)
+        public HomeController(IListServices<Product> services)
         {
             _services = services;
         }
