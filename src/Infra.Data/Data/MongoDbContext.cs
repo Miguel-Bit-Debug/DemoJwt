@@ -13,8 +13,8 @@ namespace Infra.Data.Data
 
         public MongoDbContext(IConfiguration configuration)
         {
-            var mongoClient = new MongoClient(configuration["DbConnection"]);
-            _database = mongoClient.GetDatabase(configuration["DatabaseName-Application"]);
+            var mongoClient = new MongoClient("mongodb+srv://mongoapplication:mongo170396@cluster0.wwvw8.mongodb.net/test?authSource=admin&replicaSet=atlas-otpicg-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true");
+            _database = mongoClient.GetDatabase("application");
         }
 
         public IMongoCollection<T> Collection<T>()
