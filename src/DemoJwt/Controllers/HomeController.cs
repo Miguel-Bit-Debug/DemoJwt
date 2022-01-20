@@ -14,7 +14,7 @@ namespace DemoJwt.Controllers
             _services = services;
         }
 
-        [HttpGet("/")]
+        [HttpGet("v1/api")]
         public IActionResult Index()
         {
             var products = _services.List();
