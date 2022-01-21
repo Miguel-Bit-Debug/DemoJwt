@@ -23,4 +23,8 @@ RUN dotnet publish "Infra.Data.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Infra.Data.dll"]
+
+RUN useradd -m mdmago
+USER mdmago
+
+CMD ASPNETCORE_URLS="http://*:$PORT" dotnet DemoJwt.dll
