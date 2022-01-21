@@ -33,7 +33,7 @@ namespace DemoJwt
             services.Configure<JwtSettings>(jwtSection);
             var appSettings = jwtSection.Get<JwtSettings>();
 
-            var key = Encoding.UTF8.GetBytes(appSettings.SecretKey);
+            var key = Encoding.UTF8.GetBytes(Configuration["SecretKey"]);
 
             services.AddAuthentication(x => 
             {
@@ -49,8 +49,8 @@ namespace DemoJwt
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    ValidIssuer = appSettings.Issuer,
-                    ValidAudience = appSettings.Audience
+                    ValidIssuer = Configuration["Issuer"],
+                    ValidAudience = Configuration["Audience"]
                 };
             });
         }
