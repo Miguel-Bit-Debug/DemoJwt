@@ -14,7 +14,7 @@ namespace Infra.Data.Data
         public MongoDbContext(IConfiguration configuration)
         {
             var mongoClient = new MongoClient(configuration["DbConnection"]);
-            _database = mongoClient.GetDatabase(configuration["DatabaseName-Application"]);
+            _database = mongoClient.GetDatabase("application");
         }
 
         public IMongoCollection<T> Collection<T>()
