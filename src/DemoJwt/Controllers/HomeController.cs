@@ -17,8 +17,8 @@ namespace DemoJwt.Controllers
         [HttpGet("v1/api")]
         public IActionResult Index()
         {
-            //var products = _services.List();
-            return Ok("Sem risadola");
+            var products = _services.List();
+            return Ok(products);
         }
     }
 }
