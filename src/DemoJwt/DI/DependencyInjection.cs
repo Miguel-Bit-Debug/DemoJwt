@@ -26,7 +26,7 @@ namespace DemoJwt.DI
                 opt.Lockout.MaxFailedAccessAttempts = 5;
                 opt.Lockout.DefaultLockoutTimeSpan = new TimeSpan(0, 0, 15, 0);
             }).AddMongoDbStores<AccountModel, ApplicationRole, Guid>(
-                configuration.GetSection("DbConnection").Value,
+                configuration.GetConnectionString("DefaultConnection"),
                 configuration.GetSection("DatabaseName-Application").Value
                 ).AddDefaultTokenProviders();
 
