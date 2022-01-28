@@ -16,6 +16,7 @@ namespace DemoJwt
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            System.Console.WriteLine(configuration["Dbconnection"]);
         }
 
         public IConfiguration Configuration { get; }
